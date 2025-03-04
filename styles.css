@@ -1,0 +1,131 @@
+/* CSS 코드 */
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+    
+a, a:link, a:visited{
+    color:inherit;
+    text-decoration: none;
+}
+    
+li{
+    list-style: none;
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 150px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('images/background.png');
+    background-size: cover;
+}
+    
+.container {
+    background: #D1F0FF;
+    padding: 20px;
+    border-radius: 40px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+    
+h1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+    
+input {
+    padding: 7px;
+    width: 70%;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    margin-top: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* 입력 필드 그림자 추가 */
+}
+    
+button {
+    padding: 8px 15px;
+    margin-left: 10px;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* 버튼 그림자 추가 */
+}
+    
+button:hover {
+    background: #0056b3;
+}
+    
+li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    margin: 5px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+    height: 30px;
+    padding: 5px;
+    transition: background 0.3s ease;
+}
+
+li input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 14px; /* 체크박스 크기 줄이기 */
+    height: 14px;
+    cursor: pointer;
+    display: block;
+    align-self: center; /* 수직 정렬 강제 적용 */
+    position: relative;
+    margin: 0;
+    box-shadow: none; /* 체크박스 그림자 제거 */
+}
+
+li input[type="checkbox"]:checked + .task-content {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+li input[type="checkbox"]:checked {
+    background: #007bff;
+}
+
+li input[type="checkbox"]:checked ~ li {
+    background: #d3d3d3; /* 체크된 li의 배경을 회색으로 변경 */
+}
+
+.task-content {
+    flex-grow: 1;
+    text-align: left;
+    word-break: break-word;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.delete-btn {
+    background: #ddd;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
