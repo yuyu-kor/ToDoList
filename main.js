@@ -1,51 +1,60 @@
+let currentTaskType = 'external';
+
 document.addEventListener("DOMContentLoaded", function() {
-    loadTasks("externalTaskList");
-    loadTasks("internalTaskList");
-    loadTasks("otherTaskList");
+    loadTasks();
 });
 
-function saveTasks(listId) {
+function saveTasks() {
     const tasks = [];
-    document.querySelectorAll(`#${listId} li`).forEach(li => {
+    document.querySelectorAll(`#taskList li`).forEach(li => {
         tasks.push({
             text: li.querySelector(".task-content").innerText,
             checked: li.querySelector("input[type='checkbox']").checked
         });
     });
-    localStorage.setItem(listId, JSON.stringify(tasks));
+    localStorage.setItem(currentTaskType, JSON.stringify(tasks));
 }
 
-function loadTasks(listId) {
-    const savedTasks = JSON.parse(localStorage.getItem(listId)) || [];
+function loadTasks() {
+    const taskList = document.getElementById("taskList");
+    taskList.innerHTML = "";
+    
+    const savedTasks = JSON.parse(localStorage.getItem(currentTaskType)) || [];
     savedTasks.forEach(task => {
         let li = document.createElement("li");
         li.innerHTML = `
-            <input type='checkbox' onclick='toggleTask(this, "${listId}")' ${task.checked ? "checked" : ""}>
+            <input type='checkbox' onclick='toggleTask(this)' ${task.checked ? "checked" : ""}>
             <span class='task-content'>${task.text}</span>
-            <button class='delete-btn' onclick='removeTask(this, "${listId}")'>-</button>
+            <button onclick='removeTask(this)'>-</button>
         `;
-        document.getElementById(listId).appendChild(li);
+        taskList.appendChild(li);
     });
 }
 
-function addTask(inputId, listId) {
-    let taskInput = document.getElementById(inputId);
+function changeTaskType(type) {
+    currentTaskType = type;
+    document.getElementById("taskTitle").innerText = type === 'external' ? '외부업무' : type === 'internal' ? '내부업무' : '기타업무';
+    loadTasks();
+}
+
+function addTask() {
+    let taskInput = document.getElementById("taskInput");
     let taskText = taskInput.value.trim();
     if (taskText === "") return;
     
     let li = document.createElement("li");
     li.innerHTML = `
-        <input type='checkbox' onclick='toggleTask(this, "${listId}")'>
+        <input type='checkbox' onclick='toggleTask(this)'>
         <span class='task-content'>${taskText}</span>
-        <button class='delete-btn' onclick='removeTask(this, "${listId}")'>-</button>
+        <button onclick='removeTask(this)'>-</button>
     `;
     
-    document.getElementById(listId).appendChild(li);
+    document.getElementById("taskList").appendChild(li);
     taskInput.value = "";
-    saveTasks(listId);
+    saveTasks();
 }
 
-function toggleTask(checkbox, listId) {
+function toggleTask(checkbox) {
     let taskContent = checkbox.nextElementSibling;
     if (checkbox.checked) {
         taskContent.style.textDecoration = "line-through";
@@ -54,10 +63,10 @@ function toggleTask(checkbox, listId) {
         taskContent.style.textDecoration = "none";
         taskContent.style.opacity = "1";
     }
-    saveTasks(listId);
+    saveTasks();
 }
 
-function removeTask(button, listId) {
+function removeTask(button) {
     button.parentElement.remove();
-    saveTasks(listId);
+    saveTasks();
 }
