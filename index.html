@@ -5,84 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>업무 목록</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .task-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .container {
-            flex: 1;
-            min-width: 250px;
-            max-height: 70vh;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-        }
-        .task-content {
-            word-break: break-word;
-            overflow-wrap: break-word;
-            white-space: normal;
-        }
-        ul {
-            flex-grow: 1;
-            max-height: 55vh;
-            overflow-y: auto;
-            padding: 0;
-            margin: 0;
-            scrollbar-width: thin;
-            scrollbar-color: #007bff #f0f0f0;
-        }
-        ul::-webkit-scrollbar {
-            width: 8px;
-        }
-        ul::-webkit-scrollbar-track {
-            background: #f0f0f0;
-            border-radius: 10px;
-        }
-        ul::-webkit-scrollbar-thumb {
-            background: #007bff;
-            border-radius: 10px;
-        }
-        ul::-webkit-scrollbar-thumb:hover {
-            background: #0056b3;
-        }
-        .input-container {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-    </style>
 </head>
 <body>
     <img src="images/logo.png" alt="BGN 밝은눈안과 로고" class="logo">
     
-    <div class="task-container">
-        <div class="container">
-            <h1>외부업무</h1>
-            <ul id="externalTaskList"></ul>
-            <div class="input-container">
-                <input type="text" id="externalTaskInput" placeholder="외부업무 입력">
-                <button onclick="addTask('externalTaskInput', 'externalTaskList')">Add</button>
-            </div>
-        </div>
-        
-        <div class="container">
-            <h1>내부업무</h1>
-            <ul id="internalTaskList"></ul>
-            <div class="input-container">
-                <input type="text" id="internalTaskInput" placeholder="내부업무 입력">
-                <button onclick="addTask('internalTaskInput', 'internalTaskList')">Add</button>
-            </div>
-        </div>
-        
-        <div class="container">
-            <h1>기타업무</h1>
-            <ul id="otherTaskList"></ul>
-            <div class="input-container">
-                <input type="text" id="otherTaskInput" placeholder="기타업무 입력">
-                <button onclick="addTask('otherTaskInput', 'otherTaskList')">Add</button>
-            </div>
+    <div class="button-container">
+        <button onclick="changeTaskType('external')">외부업무</button>
+        <button onclick="changeTaskType('internal')">내부업무</button>
+        <button onclick="changeTaskType('other')">기타업무</button>
+    </div>
+    
+    <div class="container">
+        <h1 id="taskTitle">외부업무</h1>
+        <ul id="taskList"></ul>
+        <div class="input-container">
+            <input type="text" id="taskInput" placeholder="업무 입력">
+            <button onclick="addTask()">Add</button>
         </div>
     </div>
     
