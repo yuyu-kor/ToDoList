@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>업무 목록</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
     <img src="images/logo.png" alt="BGN 밝은눈안과 로고" class="logo">
@@ -20,10 +21,12 @@
         <ul id="taskList"></ul>
         <div class="input-container">
             <input type="text" id="taskInput" placeholder="업무 입력">
+            <input type="text" id="deadlineInput" placeholder="데드라인">
             <button onclick="addTask()">Add</button>
         </div>
     </div>
     
     <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </body>
 </html>
